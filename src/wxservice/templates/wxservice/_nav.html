@@ -1,0 +1,27 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img height="45" width="45" src="{% if user.profile.image.url %}{{ user.profile.image.url }}{% else%}{{ user.headimgurl}} {%endif%}"
+            alt="" class="rounded-circle account-img">
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="navbar-nav">
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'order-new' %}">新订单</a>
+            <a class="nav-link" href="{% url 'wx-login' %}">我的评价</a>
+            <a class="nav-link" href="{% url 'wx-login' %}">个人信息</a>
+            {% else %}
+            <a class="nav-link" href="{% url 'login' %}">登录</a>
+            <a class="nav-link" href="{% url 'register' %}">注册</a>
+            {% endif %}
+        </div>
+        <!-- <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form> -->
+    </div>
+</nav>

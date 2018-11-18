@@ -1,0 +1,67 @@
+{% extends 'review/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block customCss %}
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'review/css/fontawesome-stars.css' %}">
+{% endblock %}
+
+{% block content%}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">{{title}}</h1>
+        <p class="display-5">{{product}}</p>
+        {% if confirm_message %}
+        <p>{{ confirm_message }}</p>
+        {% endif %}
+
+        {% if form %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.ft_star.id_for_label }}">{{form.ft_star.label}}</label>
+                {{ form.ft_star }}
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.ds_star.id_for_label }}">{{form.ds_star.label}}</label>
+                {{ form.ds_star }}
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.tf_star.id_for_label }}">{{form.tf_star.label}}</label>
+                {{ form.tf_star }}
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <input type="submit" value="review" class="btn btn-primary">
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% for review in review_sets %}
+<img src="{{ review.stuff.user.profile.image.url }}" alt="" height="50">
+{% endfor %}
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'review/js/jquery.barrating.min.js' %}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#id_ds_star').barrating({
+            theme: 'fontawesome-stars',
+            showSelectedRating: true
+        });
+        $('#id_ft_star').barrating({
+            theme: 'fontawesome-stars'
+        });
+        $('#id_tf_star').barrating({
+            theme: 'fontawesome-stars'
+        });
+    });
+</script>
+
+{% endblock %}

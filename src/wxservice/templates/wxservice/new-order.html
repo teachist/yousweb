@@ -1,0 +1,33 @@
+{% extends 'wxservice/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block customCss %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'collectstar/css/jd.global.min.css' %}"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'collectstar/css/jd.comment.min.css' %}"/> -->
+{% endblock %}
+
+{% block content%}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">{{title}}</h1>
+        {% if confirm_message %}
+        <p>{{ confirm_message }}</p>
+        {% endif %}
+
+        {% if form %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form |crispy }}
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+</script>
+{% endblock %}

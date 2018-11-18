@@ -1,0 +1,17 @@
+{% extends 'review/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+<div class="media">
+    <img height="72" width="72" src="{{ user.profile.image.url }}{{user.headimgurl}}" alt="" class="rounded-circle account-img">
+    <div class="media-body pl-4">
+        {% if user.username %}
+        <h2 class="account-heading">{{ user.username}}</h2>
+        {% else %}
+        <h2 class="account-heading">{{ user.nickname}}</h2>
+        {% endif %}
+        <p class="text-secondary">{{ user.email }}</p>
+    </div>
+</div>
+{% endblock %}
